@@ -3,17 +3,12 @@
 --
 -- Text encoding used: System
 --
-PRAGMA foreign_keys = off;
-BEGIN TRANSACTION;
-
--- Table: Authors
-CREATE TABLE IF NOT EXISTS Authors (
+CREATE TABLE Authors (
     AuthorID INTEGER PRIMARY KEY,
     Name TEXT NOT NULL
 );
 
--- Table: Books
-CREATE TABLE IF NOT EXISTS Books (
+CREATE TABLE Books (
     BookID INTEGER PRIMARY KEY,
     Title TEXT NOT NULL,
     Year INTEGER,
@@ -21,16 +16,14 @@ CREATE TABLE IF NOT EXISTS Books (
     FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID)
 );
 
--- Table: Members
-CREATE TABLE IF NOT EXISTS Members (
+CREATE TABLE Members (
     MemberID INTEGER PRIMARY KEY,
     Name TEXT NOT NULL,
     Email TEXT UNIQUE,
     JoinDate DATE
 );
 
--- Table: Transactions
-CREATE TABLE IF NOT EXISTS Transactions (
+CREATE TABLE Transactions (
     TransactionID INTEGER PRIMARY KEY,
     MemberID INTEGER,
     BookID INTEGER,
@@ -39,6 +32,3 @@ CREATE TABLE IF NOT EXISTS Transactions (
     FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
     FOREIGN KEY (BookID) REFERENCES Books(BookID)
 );
-
-COMMIT TRANSACTION;
-PRAGMA foreign_keys = on;
